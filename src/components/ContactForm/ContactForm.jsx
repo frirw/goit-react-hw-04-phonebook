@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const FormContainer = styled.form`
@@ -33,61 +33,59 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+const ContactForm = ({ submit }) => {
+  const [formData, setFormData] = useState({ name: '', number: '' });
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    if (this.state.name.trim() === '' || this.state.number.trim() === '') {
+    if (formData.name.trim() === '' || formData.number.trim() === '') {
       alert('Please fill in both name and number fields.');
       return;
     }
-    this.props.submit(this.state);
-    this.reset();
+    submit(formData);
+    reset();
   };
 
-  reset = () => {
-    this.setState({ name: '', number: '' });
+  const reset = () => {
+    setFormData({ name: '', number: '' });
   };
 
-  handleChange = ({ target: { value, name } }) => {
-    this.setState({ [name]: value });
+  const handleChange = ({ target: { value, name } }) => {
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  render() {
-    return (
-      <FormContainer onSubmit={this.handleSubmit}>
-        <InputWrapper>
-          <Label htmlFor="Name">Name</Label>
-          <Input
-            pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            required
-            value={this.state.name}
-            onChange={this.handleChange}
-            name="name"
-            type="text"
-            id="Name"
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <Label htmlFor="Number">Number</Label>
-          <Input
-            pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-            required
-            value={this.state.number}
-            onChange={this.handleChange}
-            name="number"
-            type="tel"
-            id="Number"
-          />
-        </InputWrapper>
-        <SubmitButton type="submit">Add contact</SubmitButton>
-      </FormContainer>
-    );
-  }
-}
+  return (
+    <FormContainer onSubmit={handleSubmit}>
+      <InputWrapper>
+        <Label htmlFor="Name">Name</Label>
+        <Input
+          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          required
+          value={formData.name}
+          onChange={handleChange}
+          name="name"
+          type="text"
+          id="Name"
+        />
+      </InputWrapper>
+      <InputWrapper>
+        <Label htmlFor="Number">Number</Label>
+        <Input
+          pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
+          required
+          value={formData.number}
+          onChange={handleChange}
+          name="number"
+          type="tel"
+          id="Number"
+        />
+      </InputWrapper>
+      <SubmitButton type="submit">Add contact</SubmitButton>
+    </FormContainer>
+  );
+};
 
 export default ContactForm;
