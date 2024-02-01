@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin-right: auto;
-  margin-left: auto;
-`;
+import css from './App.module.css';
 
 const App = () => {
   const [contacts, setContacts] = useState([
@@ -59,13 +51,14 @@ const App = () => {
   );
 
   return (
-    <Container>
+    <div className={css.container}>
+      {' '}
       <h1>Phonebook</h1>
       <ContactForm submit={formSubmit} />
       <h2>Contacts</h2>
       <Filter value={filter} onChange={handleSearchChange} />
       <ContactList deleteContact={deleteContact} contacts={filteredContacts} />
-    </Container>
+    </div>
   );
 };
 

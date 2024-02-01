@@ -1,31 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const ListItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const Button = styled.button`
-  background-color: pink;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-`;
+import css from './ContactListItem.module.css';
 
 export const ContactListItem = ({ data, deleteContact }) => {
   return (
-    <ListItem key={data.id}>
+    <li className={css.listItem} key={data.id}>
       <span>
         {data.name} : {data.number}
       </span>
-      <Button onClick={() => deleteContact(data.id)} type="button">
+      <button
+        onClick={() => deleteContact(data.id)}
+        type="button"
+        className={css.button}
+      >
         Delete
-      </Button>
-    </ListItem>
+      </button>
+    </li>
   );
 };
 

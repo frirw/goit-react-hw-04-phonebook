@@ -1,37 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const FormContainer = styled.form`
-  margin-top: 20px;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-`;
-
-const Label = styled.label`
-  margin-bottom: 5px;
-  color: white;
-  background-color: lightpink;
-`;
-
-const Input = styled.input`
-  padding: 5px;
-  border-radius: 3px;
-  border: 1px solid gray;
-`;
-
-const SubmitButton = styled.button`
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 5px;
-  background-color: pink;
-  color: white;
-  border: none;
-  cursor: pointer;
-`;
+import css from './ContactForm.module.css';
 
 const ContactForm = ({ submit }) => {
   const [formData, setFormData] = useState({ name: '', number: '' });
@@ -58,10 +26,12 @@ const ContactForm = ({ submit }) => {
   };
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
-      <InputWrapper>
-        <Label htmlFor="Name">Name</Label>
-        <Input
+    <form className={css.formContainer} onSubmit={handleSubmit}>
+      <div className={css.inputWrapper}>
+        <label htmlFor="Name" className={css.label}>
+          Name
+        </label>
+        <input
           pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           required
           value={formData.name}
@@ -69,11 +39,14 @@ const ContactForm = ({ submit }) => {
           name="name"
           type="text"
           id="Name"
+          className={css.input}
         />
-      </InputWrapper>
-      <InputWrapper>
-        <Label htmlFor="Number">Number</Label>
-        <Input
+      </div>
+      <div className={css.inputWrapper}>
+        <label htmlFor="Number" className={css.label}>
+          Number
+        </label>
+        <input
           pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
           required
           value={formData.number}
@@ -81,10 +54,13 @@ const ContactForm = ({ submit }) => {
           name="number"
           type="tel"
           id="Number"
+          className={css.input}
         />
-      </InputWrapper>
-      <SubmitButton type="submit">Add contact</SubmitButton>
-    </FormContainer>
+      </div>
+      <button type="submit" className={css.submitButton}>
+        Add contact
+      </button>
+    </form>
   );
 };
 

@@ -1,0 +1,14 @@
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: pink;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}

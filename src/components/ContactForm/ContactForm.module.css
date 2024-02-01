@@ -1,0 +1,31 @@
+.formContainer {
+  margin-top: 20px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.label {
+  margin-bottom: 5px;
+  color: white;
+  background-color: lightpink;
+}
+
+.input {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid gray;
+}
+
+.submitButton {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: pink;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
